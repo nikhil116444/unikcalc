@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Salary Calculator</title>
+</head>
+<body>
+  <h1>Salary Calculator</h1>
+  <form>
+    <label for="salary">Enter your salary:</label><br>
+    <input type="number" id="salary" name="salary"><br>
+    <br>
+    <label for="tax-rate">Enter your tax rate (%):</label><br>
+    <input type="number" id="tax-rate" name="tax-rate"><br>
+    <br>
+    <label for="pay-frequency">Select pay frequency:</label><br>
+    <select id="pay-frequency" name="pay-frequency">
+      <option value="yearly">Yearly</option>
+      <option value="monthly">Monthly</option>
+      <option value="semi-monthly">Semi-Monthly</option>
+      <option value="weekly">Weekly</option>
+      <option value="hourly">Hourly</option>
+    </select>
+    <br><br>
+    <button type="button" onclick="calculateSalary()">Calculate</button>
+  </form> 
+  <br>
+  <p>Your net salary is: <span id="result"></span></p>
+
+  <script>
+    function calculateSalary() {
+      const salary = document.getElementById("salary").value;
+      const taxRate = document.getElementById("tax-rate").value;
+      const payFrequency = document.getElementById("pay-frequency").value;
+      let netSalary = salary - (salary * taxRate / 100);
+
+      if (payFrequency === "monthly") {
+        netSalary /= 12;
+      } else if (payFrequency === "semi-monthly") {
+        netSalary /= 24;
+      } else if (payFrequency === "weekly") {
+        netSalary /= 52;
+      } else if (payFrequency === "hourly") {
+        netSalary /= 2080;
+      }
+
+      document.getElementById("result").innerHTML = netSalary;
+    }
+  </script>
+</body>
+</html>
